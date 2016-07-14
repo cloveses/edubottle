@@ -13,7 +13,7 @@ def get_session():
 def add_user(name,passwd):
     if name and passwd:
         sess = get_session()
-        passwd = make_passwd(make_passwd)
+        passwd = make_passwd(passwd)
         u = User(name=name,passwd=passwd)
         sess.add(u)
         sess.commit()

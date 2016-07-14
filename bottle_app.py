@@ -49,33 +49,50 @@ def index():
     if 'uname' in request.cookies:
         current_user = request.cookies.uname
     urls = controls.get_all_proj()
-    return template('index',current_user=current_user,urls=urls)
+    return template('index',current_user=current_user,urls=urls,hint_info='abc')
 
 @route('/login')
 def login():
     hint_info = 'abc'
     return template('login',hint_info=hint_info)
 
+def signact(name,passwd):
+    u = controls.add_user(name,passwd)
+    return u
+
+
+def loginact(name,passwd):
+    u = controls.get_user(name,passwd)
+    return u
+
+
 @route('/login',method='POST')
 def login_pst():
-    name = request.forms.get('name')
-    passwd =request.forms.get('passwd')
-    action = request.forms.get('action')
-    vf_txt = request.forms.get('vf_txt')
+    name = request.forms.name
+    passwd =request.forms.passwd
+    action = request.forms.action
+    vf_txt = request.forms.vf_txt
     if vf_txt:
         redirect('/login')
     if name and passwd and action:
-        flag = False
+        u = None
         if action == 'login':
-            flag = loginact(name,passwd)
+            u = loginact(name,passwd)
         elif action == 'sign':
-            flag = signact(name,passwd)
-        if flag:
+            u = signact(name,passwd)
+        if u:
+            response.set_cookie('uname',u.name.encode().decode('ISO-8859-1'),httponly='on')
             redirect('/')
+            # return u.name
         else:
             redirect('/login')
     else:
         redirect('/login')
+
+@route('/logout')
+def logout():
+    response.set_cookie('uname','')
+    redirect('/')
 
 application = default_app()
 # run(debug=True,reload=True)
