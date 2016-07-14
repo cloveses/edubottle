@@ -1,4 +1,4 @@
-from bottle import route,run,error,static_file,request,default_app
+from bottle import route,run,error,static_file,request,default_app,response
 from bottle import mako_template as template
 from mylib.captcha import utils
 import settings
@@ -41,7 +41,7 @@ def gen_captcha():
     kwargs['distortion'] = [period, amplitude, (2.0, 0.2)]
     image = utils.gen_captcha(**kwargs)
     print(',,,,,,,,,,,,,,', image['text'])
-    self.write(image['src'])
+    return image['src']
 
 @route('/')
 def index():
