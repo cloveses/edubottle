@@ -1,4 +1,4 @@
-from bottle import route,run,error,static_file,request
+from bottle import route,run,error,static_file,request,default_app
 from bottle import mako_template as template
 from mylib.captcha import utils
 import settings
@@ -59,4 +59,5 @@ def login():
 def login_pst():
     pass
 
-run(debug=True,reload=True)
+application = default_app()
+# run(debug=True,reload=True)

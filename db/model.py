@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine,Column,Integer,String,DateTime,Boolean
 from sqlalchemy.ext.declarative import declarative_base
 
-engine = create_engine('sqlite///web.db')
+engine = create_engine('sqlite:///web.db')
 Base = declarative_base()
 
 class User(Base):

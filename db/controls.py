@@ -1,13 +1,13 @@
 import hashlib
 from datetime import datetime
-from sqlalchemy.orm import session_maker
+from sqlalchemy.orm import sessionmaker
 from .model import User,ProjectName,engine
 
 def make_passwd(passwd):
     return hashlib.sha224(passwd.encode('utf-8')).hexdigest()
 
 def get_session():
-    Session = session_maker(bind=engine)
+    Session = sessionmaker(bind=engine)
     return Session()
 
 def add_user(name,passwd):
