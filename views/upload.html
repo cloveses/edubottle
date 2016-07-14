@@ -1,0 +1,73 @@
+<%inherit file="base.html"/>
+<%block name="title">Index</%block>
+<%block name="main">
+<div id="container">
+<!--     <h2>Index</h2>
+ -->    
+ %if not current_user:
+    <div class="row" style="background-color:#666;">
+        <div class="col-md-12 text-right">
+        <a href="/login" class="btn btn-primary">login or signup</a>
+        </div>
+    </div>
+        %else:
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10 text-right"  style="background-color:#CFC;">
+        welcome ${current_user}!
+        %if current_user == 'superadmn':
+            <a href="/admin"  class="btn btn-primary">admin manage</a>
+        %endif
+        <a href="/logout" class="btn btn-primary">logout</a>
+        ${hint_info}
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+    ${hint_info}
+            <script src="${static_url('js/index.js')}"></script>
+
+    <div class="row" style="margin-top:10px;">
+        <div class="col-md-1"></div>
+        <div class="col-md-2">
+        <ul class="nav nav-pills  nav-stacked">
+            <li> <a href="/" >首页</a></li>
+            %for url in urls:
+                <li><a href="/upload/${url.url}"  class="${'disabled' if not url.status or url.url == curl else ''}">${url.name}</a></li>
+            %endfor
+        </ul>
+        </div>
+        <div class="col-md-3"  style="border-left:1px solid #999;padding-left:30px;">
+        <p class="h3 text-center">
+        ${name}
+        </p>
+        <br/>
+            <form method="post" id="uploadform" role="form" enctype="multipart/form-data">
+            ${xsrf_form_html()}
+            <input type="hidden" value="/szupload" id='posturl' />
+            <input type="hidden" value="${str(upload_max_size)}" id="upload_max_size"/>
+            <div class="form-group">
+                <label for="fileToUpload">选择文件</label>
+                <input type="file" name="myfile" id="fileToUpload" onchange="fileSelected();"/>
+            </div>
+                <div id="fileName"></div>
+                <div id="fileSize"></div>
+                <div id="fileType"></div>
+            <div class="row">
+                <input type="button" onclick="uploadFile()" value="Upload" class="btn btn-primary"/>
+            </div>
+            <div class="progress progress-striped">
+               <div class="progress-bar progress-bar-success" role="progressbar" 
+                  aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"  id="myuploadprogress"  
+                  style="width: 0%;">
+<!--                   <span class="sr-only">90% 完成（成功）</span>
+ -->               </div>
+            </div>
+                <div id="progressNumber"></div>
+            </form>
+        </div>
+        <div class="col-md-5"  style="border-left:1px solid #999;padding-left:30px;">${introduce}</div>
+         <div class="col-md-1"></div>
+   </div>
+    %endif
+    </div>
+</%block>

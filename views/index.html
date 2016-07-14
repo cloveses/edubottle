@@ -1,0 +1,44 @@
+<%inherit file="base.html"/>
+<%block name="title">Index</%block>
+<%block name="main">
+<div id="container">
+ <!--    <div class="row">
+         <h2 class="text-center">Index</h2>
+    </div> -->
+        %if not current_user:
+    <div class="row" style="background-color:#666;">
+        <div class="col-md-12 text-right">
+        <a href="/login" class="btn btn-primary">login or signup</a>
+        </div>
+    </div>
+        %else:
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10 text-right"  style="background-color:#CFC;">
+        welcome ${current_user}!
+        %if current_user == 'superadmn':
+            <a href="/admin"  class="btn btn-primary">admin manage</a>
+        %endif
+        <a href="/logout" class="btn btn-primary">logout</a>
+        ${hint_info}
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+    <div class="row" style="margin-top:10px;">
+        <div class="col-md-1"></div>
+        <div class="col-md-3">
+        <ul class="nav nav-pills  nav-stacked">
+            <li> <a href="/" >首页</a></li>
+            %for url in urls:
+                <li><a href="/upload/${url.url}"  class="${'disabled' if not url.status else ''}">${url.name}</a></li>
+            %endfor
+        </ul>
+        </div>
+        <div class="col-md-7">
+        help
+        </div>
+         <div class="col-md-1"></div>
+   </div>
+     %endif
+</div>
+</%block>

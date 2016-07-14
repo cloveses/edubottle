@@ -1,0 +1,44 @@
+<%inherit file="base.html"/>
+<%block name="title">Login</%block>
+<%block name="main">
+<div class="container">
+<div class="row">
+<div class="col-md-3"></div>
+<div class="col-md-6">
+    <h2 class="text-center">Login or signup</h2>
+    %if hint_info:
+    <div class="alert alert-info">
+      <a class="close" data-dismiss="alert">×</a>
+      <strong>Info!</strong>${hint_info}
+    </div>
+    %endif
+    <form method="post" role="form">
+        <div class="form-group">
+        <label>action:</label>
+            <select name="action" class="form-control">
+                <option value="login" selected>login</option>
+                <option value="sign">sign</option>
+            </select>
+        </div>
+        <div class="form-group">
+           <label> name:</label>
+           <input type="text" name="name" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>password:</label>
+            <input type="password" name="passwd"  class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label>verify text:</label>
+            <input type="text" name="vf_txt"  class="form-control"/>
+            <img src="/captcha?key=v_key"/>
+        </div>
+        <div class="form-group">
+        <input type="submit" name="" value="submit" class="btn btn-primary" />
+        </div>
+    </form>
+    </div>
+    <div class="col-md-3"></div>
+    </div>
+</div>
+</%block>
