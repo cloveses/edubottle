@@ -21,11 +21,11 @@ def error404(error):
 
 @route('/static/<filename>')
 def serv_static(filename):
-    root = './views/js'
+    root = '/home/cloveses/mysite/views/js'
     if filename.endswith('js'):
-        root = './views/js/js'
+        root = '/home/cloveses/mysite/views/js/js'
     elif filename.endswith('css'):
-        root = './views/js/css'
+        root = '/home/cloveses/mysite/views/js/css'
     return static_file(filename,root=root)
 
 @route('/captcha')
