@@ -30,6 +30,7 @@ def serv_static(filename):
 
 @route('/captcha')
 def gen_captcha():
+    response.content_type = "image/jpeg"
     verifytext = gen_verify_text()
     print(verifytext)
     kwargs = {}
