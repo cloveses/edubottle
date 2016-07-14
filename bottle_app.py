@@ -1,4 +1,4 @@
-from bottle import route,run,error,static_file,request,default_app,response
+from bottle import route,run,error,static_file,request,default_app,response,redirect
 from bottle import mako_template as template
 from mylib.captcha import utils
 import settings
@@ -58,7 +58,24 @@ def login():
 
 @route('/login',method='POST')
 def login_pst():
-    pass
+    name = request.forms.get('name')
+    passwd =request.forms.get('passwd')
+    action = request.forms.get('action')
+    vf_txt = request.forms.get('vf_txt')
+    if vf_txt:
+        redirect('/login')
+    if name and passwd and action:
+        flag = False
+        if action == 'login':
+            flag = loginact(name,passwd)
+        elif action == 'sign':
+            flag = signact(name,passwd)
+        if flag:
+            redirect('/')
+        else:
+            redirect('/login')
+    else:
+        redirect('/login')
 
 application = default_app()
 # run(debug=True,reload=True)
