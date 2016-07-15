@@ -122,7 +122,7 @@ def admin_get():
     if pname:
         controls.chn_status(pname)
     all_user = controls.get_all_user()
-    all_proj = controls.get_all_pro()
+    all_proj = controls.get_all_proj()
     paras = {"hint_info":'hint_info',
     'all_user':all_user,
     'all_proj':all_proj}
