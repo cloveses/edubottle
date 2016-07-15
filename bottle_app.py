@@ -125,7 +125,8 @@ def admin_get():
     all_proj = controls.get_all_proj()
     paras = {"hint_info":'hint_info',
     'all_user':all_user,
-    'all_proj':all_proj}
+    'all_proj':all_proj,
+    'current_user':settings.mgrinfo['name'],}
     return template('admin',**paras)
 
 @route('/admin',method="POST")
