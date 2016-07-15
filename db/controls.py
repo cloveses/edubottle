@@ -66,3 +66,11 @@ def get_all_user():
 def get_all_proj():
     sess = get_session()
     return sess.query(ProjectName).all()
+
+def get_info_url(url):
+    if url:
+        sess = get_session()
+        proj = sess.query(ProjectName).filter_by(url=url).first()
+        if proj:
+            return proj.name,proj.introduce
+    return '',''

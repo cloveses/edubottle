@@ -14,3 +14,6 @@ CPTCH = {'text': "",
 
 mgrinfo = {'name':'spradmn',
     'passwd':'6dac256701de2cac2c03f745f7b3448688d28c784b4e5272568af57f'}
+
+
+UPLOAD_MAX_SIZE = 3   #MB

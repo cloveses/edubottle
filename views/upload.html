@@ -42,7 +42,6 @@
         </p>
         <br/>
             <form method="post" id="uploadform" role="form" enctype="multipart/form-data">
-            ${xsrf_form_html()}
             <input type="hidden" value="/szupload" id='posturl' />
             <input type="hidden" value="${str(upload_max_size)}" id="upload_max_size"/>
             <div class="form-group">

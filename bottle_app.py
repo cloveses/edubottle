@@ -140,5 +140,20 @@ def admin_pst():
         controls.add_proname(name,url,introduce)
     redirect('/admin')
 
+@route('/upload/<url>')
+def upload(url=''):
+    urls = controls.get_all_proj()
+    name,introduce = controls.get_info_url(url)
+    paras = {
+        'hint_info':'abc',
+        "upload_max_size":settings.UPLOAD_MAX_SIZE ,
+        'urls':urls,
+        'introduce':introduce,
+        'name':name,
+        'curl':url,
+    }
+    return template('uplod',**paras)
+
+
 application = default_app()
 # run(debug=True,reload=True)
