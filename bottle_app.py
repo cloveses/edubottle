@@ -137,7 +137,7 @@ def admin_pst():
     url = request.forms.url if 'url' in request.forms else ''
     introduce = request.forms.introduce if 'introduce' in request.forms else ''
     if name and url:
-        add_proname(name,url,introduce)
+        controls.add_proname(name,url,introduce)
     redirect('/admin')
 
 application = default_app()
