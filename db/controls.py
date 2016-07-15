@@ -10,6 +10,12 @@ def get_session():
     Session = sessionmaker(bind=engine)
     return Session()
 
+def user_exist(name):
+    sess = get_session()
+    q = sess.query(User).filter_by(name=name).first()
+    if q:
+        return True
+
 def add_user(name,passwd):
     if name and passwd:
         sess = get_session()
@@ -31,6 +37,15 @@ def del_user(name):
     if name:
         sess = get_session()
         sess.query(User).filter_by(name=name).delete()
+
+def proj_exist(name,url):
+    sess = get_session()
+    q = sess.query(ProjectName).filter_by(name=name).first()
+    if q:
+        return True
+    q = sess.query(ProjectName).filter_by(url=url).first()
+    if q:
+        return True
 
 def add_proname(name,url,introduce):
     if name and url:

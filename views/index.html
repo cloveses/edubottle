@@ -20,10 +20,17 @@
             <a href="/admin"  class="btn btn-primary">admin manage</a>
         %endif
         <a href="/logout" class="btn btn-primary">logout</a>
-        ${hint_info}
         </div>
         <div class="col-md-1"></div>
     </div>
+    %if hint_info:
+    <div class="row">
+    <div class="alert alert-info">
+      <a class="close" data-dismiss="alert">×</a>
+      <strong>Info!</strong>${hint_info}
+    </div>
+    </div>
+    %endif
     <div class="row" style="margin-top:10px;">
         <div class="col-md-1"></div>
         <div class="col-md-3">

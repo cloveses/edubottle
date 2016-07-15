@@ -14,10 +14,18 @@
     <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-10 text-right"  style="background-color:#CFC;">
-               ${hint_info} welcome ${current_user}!<a href="/logout">logout</a>
+               welcome ${current_user}!<a href="/logout">logout</a>
         </div>
         <div class="col-md-1"></div>
     </div>
+    %if hint_info:
+    <div class="row">
+    <div class="alert alert-info">
+      <a class="close" data-dismiss="alert">×</a>
+      <strong>Info!</strong>${hint_info}
+    </div>
+    </div>
+    %endif
 
     <div class="row">
         <div class="col-md-1"></div>

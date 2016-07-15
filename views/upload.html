@@ -23,7 +23,14 @@
         </div>
         <div class="col-md-1"></div>
     </div>
-    ${hint_info}
+    %if hint_info:
+    <div class="row">
+    <div class="alert alert-info">
+      <a class="close" data-dismiss="alert">×</a>
+      <strong>Info!</strong>${hint_info}
+    </div>
+    </div>
+    %endif
             <script src="/static/index.js"></script>
 
     <div class="row" style="margin-top:10px;">

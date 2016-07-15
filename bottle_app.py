@@ -16,6 +16,14 @@ def gen_verify_text():
     # return verifytext,v_key
     return verifytext
 
+def set_hint_info(info):
+    response.set_cookie('uname',
+                info.encode().decode('ISO-8859-1'),httponly='on')
+
+def get_hint_info():
+    info = request.cookies.hint_info
+    request.cookies.hint_info = ''
+    return info
 
 @error(404)
 def error404(error):
@@ -51,11 +59,12 @@ def index():
     if 'uname' in request.cookies:
         current_user = request.cookies.uname
     urls = controls.get_all_proj()
+    hint_info = get_hint_info()
     return template('index',current_user=current_user,urls=urls,hint_info='abc')
 
 @route('/login')
 def login():
-    hint_info = 'abc'
+    hint_info = get_hint_info()
     return template('login',hint_info=hint_info)
 
 def signact(name,passwd):
@@ -87,6 +96,7 @@ def login_pst():
     action = request.forms.action
     vf_txt = request.forms.vf_txt
     if vf_txt:
+        set_hint_info('验证码错误！')
         redirect('/login')
     if name and passwd and action:
         if name == settings.mgrinfo['name']:
@@ -97,6 +107,9 @@ def login_pst():
             if action == 'login':
                 u = loginact(name,passwd)
             elif action == 'sign':
+                if controls.user_exist(name):
+                    set_hint_info('用户名已存在！')
+                    redirect('/login')
                 u = signact(name,passwd)
             if u:
                 response.set_cookie('uname',u.name.encode().decode('ISO-8859-1'),httponly='on')
@@ -105,6 +118,7 @@ def login_pst():
             else:
                 redirect('/login')
     else:
+        set_hint_info('姓名或密码不能为空！')
         redirect('/login')
 
 @route('/logout')
@@ -124,7 +138,8 @@ def admin_get():
         controls.chn_status(pname)
     all_user = controls.get_all_user()
     all_proj = controls.get_all_proj()
-    paras = {"hint_info":'hint_info',
+    hint_info = get_hint_info()
+    paras = {"hint_info":hint_info,
     'all_user':all_user if all_user else [],
     'all_proj':all_proj if all_proj else [],
     'current_user':settings.mgrinfo['name'],}
@@ -138,7 +153,12 @@ def admin_pst():
     url = request.forms.url if 'url' in request.forms else ''
     introduce = request.forms.introduce if 'introduce' in request.forms else ''
     if name and url:
+        if controls.proj_exist(name,url):
+            set_hint_info('项目名或URL地址重复！')
+            redirect('/admin')
         controls.add_proname(name,url,introduce)
+    else:
+        set_hint_info('add projectname failure!')
     redirect('/admin')
 
 @route('/upload/<url>')
@@ -148,8 +168,9 @@ def upload(url=''):
     uname = request.cookies.uname
     urls = controls.get_all_proj()
     name,introduce = controls.get_info_url(url)
+    hint_info = get_hint_info()
     paras = {
-        'hint_info':'abc',
+        'hint_info':hint_info,
         "upload_max_size":settings.UPLOAD_MAX_SIZE ,
         'urls':urls,
         'introduce':introduce,
