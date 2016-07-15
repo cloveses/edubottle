@@ -11,3 +11,6 @@ CPTCH = {'text': "",
     'addWidth': 60, # 图片宽度
     'addHeight': 8 # 图片高度
 }
+
+mgrinfo = {'name':'spradmn',
+    'passwd':'6dac256701de2cac2c03f745f7b3448688d28c784b4e5272568af57f'}

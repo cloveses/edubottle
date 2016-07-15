@@ -3,6 +3,7 @@ from bottle import mako_template as template
 from mylib.captcha import utils
 import settings
 import random
+import datetime
 from db import controls
 
 def gen_verify_text():
@@ -65,6 +66,18 @@ def loginact(name,passwd):
     u = controls.get_user(name,passwd)
     return u
 
+def adm_login(name,passwd):
+    td = datetime.date.today()
+    td = td.isoformat()
+    td = td.split('-')[1:]
+    tdv = passwd[-4:]
+    if tdv[:2] == td[0] and tdv[2:] == td[1]:
+        passwd = passwd[:-4]
+        passwd = controls.make_passwd(passwd)
+        if passwd == settings.mgrinfo['passwd']:
+            response.set_cookie('uname',
+                name.encode().decode('ISO-8859-1'),httponly='on')
+            return True
 
 @route('/login',method='POST')
 def login_pst():
@@ -75,17 +88,21 @@ def login_pst():
     if vf_txt:
         redirect('/login')
     if name and passwd and action:
-        u = None
-        if action == 'login':
-            u = loginact(name,passwd)
-        elif action == 'sign':
-            u = signact(name,passwd)
-        if u:
-            response.set_cookie('uname',u.name.encode().decode('ISO-8859-1'),httponly='on')
-            redirect('/')
-            # return u.name
+        if name == settings.mgrinfo['name']:
+            if adm_login(name,passwd):
+                redirect('/admin')
         else:
-            redirect('/login')
+            u = None
+            if action == 'login':
+                u = loginact(name,passwd)
+            elif action == 'sign':
+                u = signact(name,passwd)
+            if u:
+                response.set_cookie('uname',u.name.encode().decode('ISO-8859-1'),httponly='on')
+                redirect('/')
+                # return u.name
+            else:
+                redirect('/login')
     else:
         redirect('/login')
 
