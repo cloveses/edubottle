@@ -4,6 +4,7 @@ from mylib.captcha import utils
 import settings
 import random
 import datetime
+import os
 from db import controls
 
 def gen_verify_text():
@@ -157,6 +158,28 @@ def upload(url=''):
         'current_user':uname,
     }
     return template('upload',**paras)
+
+@route('/upload/<url>',method='POST')
+def upload_pst(url=''):
+    if not request.cookies.uname and url:
+        redirect('/')
+    upfile = request.files.get('myfile')
+    name,ext = os.path.split(upfile.filename)
+    mypath = settings.UPLOAD_DIR
+    if not os.path.exists(mypath):
+        os.makedirs(mypath)
+    upfile.save(mypath)
+    uploadfile = os.path.join(mypath,upfile.filename)
+    from mylib.myxltools import verify
+    mset = __import__('_'.join((url,'set')))
+    info = verify.verify_file(uploadfile,mset.filters,mset.limits,mset.ncols)
+    if info:
+        os.remove(uploadfile)
+        info = '数据有误，请重新上传！\n' + info
+        return info
+    else:
+        return '上传成功！'
+
 
 
 application = default_app()
