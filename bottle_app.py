@@ -129,7 +129,7 @@ def admin_get():
     template('admin',**paras)
 
 @route('/admin',method="POST")
-def admin_pst()
+def admin_pst():
     if request.cookies.uname != settings.mgrinfo['name']:
         redirect('/')
     name = request.forms.name if 'name' in request.forms else ''
