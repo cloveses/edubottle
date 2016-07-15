@@ -126,7 +126,7 @@ def admin_get():
     paras = {"hint_info":'hint_info',
     'all_user':all_user,
     'all_proj':all_proj}
-    template('admin',**paras)
+    return template('admin',**paras)
 
 @route('/admin',method="POST")
 def admin_pst():
