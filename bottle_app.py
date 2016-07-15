@@ -183,7 +183,6 @@ def upload_pst(url=''):
         return info
     else:
         return '上传成功！'
-    redirect('/upload/%s' % url)
 
 
 
