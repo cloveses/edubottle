@@ -163,11 +163,13 @@ def upload(url=''):
 def upload_pst(url=''):
     if not request.cookies.uname and url:
         redirect('/')
+    uname = request.cookies.uname
     upfile = request.files.get('myfile')
     name,ext = os.path.split(upfile.filename)
     mypath = settings.UPLOAD_DIR
     if not os.path.exists(mypath):
         os.makedirs(mypath)
+    upfile.filename = '.'.join((uname,ext))
     upfile.save(mypath)
     uploadfile = os.path.join(mypath,upfile.filename)
     from mylib.myxltools import verify
