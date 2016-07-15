@@ -22,7 +22,7 @@
           }else{
             document.getElementById('uploadform').reset();
             alert(info);
-            history.go(0);
+            location.reload();
           }
         }
       }

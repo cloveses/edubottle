@@ -170,6 +170,8 @@ def upload_pst(url=''):
     if not os.path.exists(mypath):
         os.makedirs(mypath)
     upfile.filename = '.'.join((uname,ext))
+    if os.path.exists(os.path.join(mypath,upfile.filename)):
+        os.remove(os.path.join(mypath,upfile.filename))
     upfile.save(mypath)
     uploadfile = os.path.join(mypath,upfile.filename)
     from mylib.myxltools import verify
