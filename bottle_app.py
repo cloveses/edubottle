@@ -60,7 +60,7 @@ def index():
         current_user = request.cookies.uname
     urls = controls.get_all_proj()
     hint_info = get_hint_info()
-    return template('index',current_user=current_user,urls=urls,hint_info='abc')
+    return template('index',current_user=current_user,urls=urls,hint_info=hint_info)
 
 @route('/login')
 def login():
