@@ -22,7 +22,6 @@
           }else{
             document.getElementById('uploadform').reset();
             alert(info);
-            location.reload();
           }
         }
       }
