@@ -49,6 +49,11 @@ def chn_status(name):
             p.status = not p.status
             sess.commit()
 
+def del_pro(name):
+    if name:
+        sess = get_session()
+        sess.query(ProjectName).filter_by(name=name).delete()
+
 def get_pro(name):
     if name:
         sess = get_session()

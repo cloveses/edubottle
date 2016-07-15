@@ -111,5 +111,33 @@ def logout():
     response.set_cookie('uname','')
     redirect('/')
 
+@route('/admin')
+def admin_get():
+    if request.cookies.uname != settings.mgrinfo['name']:
+        redirect('/')
+    name = request.query.name if 'name' in request.query else ''
+    if name:
+        controls.del_user(name)
+    pname = request.query.pname if 'pname' in request.query else ''
+    if pname:
+        controls.chn_status(pname)
+    all_user = controls.get_all_user()
+    all_proj = controls.get_all_pro()
+    paras = {"hint_info":'hint_info',
+    'all_user':all_user,
+    'all_proj':all_proj}
+    template('admin',**paras)
+
+@route('/admin',method="POST")
+def admin_pst()
+    if request.cookies.uname != settings.mgrinfo['name']:
+        redirect('/')
+    name = request.forms.name if 'name' in request.forms else ''
+    url = request.forms.url if 'url' in request.forms else ''
+    introduce = request.forms.introduce if 'introduce' in request.forms else ''
+    if name and url:
+        add_proname(name,url,introduce)
+    redirect('/admin')
+
 application = default_app()
 # run(debug=True,reload=True)
