@@ -1,5 +1,6 @@
 #edubottle
 
+注意：部署网站时，model.py中的sqlalchemy连接的数据库URL最好使用绝对路径。
 
 检测数据正确性配置文件名命名方法：
 使用项目的url_set.py,比如url为szcp,则实际命名为：
