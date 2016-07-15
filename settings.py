@@ -17,4 +17,4 @@ mgrinfo = {'name':'spradmn',
 
 
 UPLOAD_MAX_SIZE = 3   #MB
-UPLOAD_DIR = os.path.join(CURRENT_PATH, 'upload')
+UPLOAD_DIR = '/home/cloveses/upload'
