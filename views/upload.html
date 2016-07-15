@@ -15,7 +15,7 @@
         <div class="col-md-1"></div>
         <div class="col-md-10 text-right"  style="background-color:#CFC;">
         welcome ${current_user}!
-        %if current_user == 'superadmn':
+        %if current_user == 'spradmn':
             <a href="/admin"  class="btn btn-primary">admin manage</a>
         %endif
         <a href="/logout" class="btn btn-primary">logout</a>
@@ -24,7 +24,7 @@
         <div class="col-md-1"></div>
     </div>
     ${hint_info}
-            <script src="${static_url('js/index.js')}"></script>
+            <script src="static/index.js"></script>
 
     <div class="row" style="margin-top:10px;">
         <div class="col-md-1"></div>

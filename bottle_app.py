@@ -142,6 +142,9 @@ def admin_pst():
 
 @route('/upload/<url>')
 def upload(url=''):
+    if not request.cookies.uname:
+        redirect('/')
+    uname = request.cookies.uname
     urls = controls.get_all_proj()
     name,introduce = controls.get_info_url(url)
     paras = {
@@ -151,6 +154,7 @@ def upload(url=''):
         'introduce':introduce,
         'name':name,
         'curl':url,
+        'current_user':uname,
     }
     return template('upload',**paras)
 
