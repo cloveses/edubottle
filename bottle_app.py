@@ -152,7 +152,7 @@ def upload(url=''):
         'name':name,
         'curl':url,
     }
-    return template('uplod',**paras)
+    return template('upload',**paras)
 
 
 application = default_app()
