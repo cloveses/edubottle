@@ -14,22 +14,22 @@
     %endif
     <form method="post" role="form">
         <div class="form-group">
-        <label>action:</label>
+        <label>注册还是登录？:</label>
             <select name="action" class="form-control">
-                <option value="login" selected>login</option>
-                <option value="sign">sign</option>
+                <option value="login" selected>登录</option>
+                <option value="sign">注册</option>
             </select>
         </div>
         <div class="form-group">
-           <label> name:</label>
+           <label> 用户名:</label>
            <input type="text" name="name" class="form-control" />
         </div>
         <div class="form-group">
-            <label>password:</label>
+            <label>密码:</label>
             <input type="password" name="passwd"  class="form-control"/>
         </div>
         <div class="form-group">
-            <label>verify text:</label>
+            <label>验证码:</label>
             <input type="text" name="vf_txt"  class="form-control"/>
             <img src="/captcha?key=v_key"/>
         </div>

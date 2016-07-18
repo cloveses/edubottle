@@ -8,18 +8,18 @@
         %if not current_user:
     <div class="row" style="background-color:#666;">
         <div class="col-md-12 text-right">
-        <a href="/login" class="btn btn-primary">login or signup</a>
+        <a href="/login" class="btn btn-primary">登录或注册</a>
         </div>
     </div>
         %else:
     <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-10 text-right"  style="background-color:#CFC;">
-        welcome ${current_user}!
+        当前登录用户： ${current_user}
         %if current_user == 'spradmn':
             <a href="/admin"  class="btn btn-primary">admin manage</a>
         %endif
-        <a href="/logout" class="btn btn-primary">logout</a>
+        <a href="/logout" class="btn btn-primary">退出</a>
         </div>
         <div class="col-md-1"></div>
     </div>
@@ -54,7 +54,7 @@
         <p>8.多次上传，文件会被自动覆盖，只保留最后一个版本数据。</p>
         <p>9.等待弹出窗口，显示“上传成功”，表示数据验证通过，已经完成数据上传。否则，请按提示信息修改数据，直到上传成功。</p>
         <br/>
-        <p>不遵循以上规则，上传不能成功。</p>
+        <p class="danger">不遵循以上规则，上传不能成功。</p>
         </div>
          <div class="col-md-1"></div>
    </div>
