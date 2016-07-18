@@ -17,7 +17,7 @@ def gen_verify_text():
     return verifytext
 
 def set_hint_info(info):
-    response.set_cookie('uname',
+    response.set_cookie('hint_info',
                 info.encode().decode('ISO-8859-1'),httponly='on')
 
 def get_hint_info():
@@ -97,6 +97,7 @@ def login_pst():
     action = request.forms.action
     vf_txt = request.forms.vf_txt
     cookie_txt = request.cookies.captchakey
+    response.set_cookie('captchakey','')
     if controls.make_passwd(vf_txt) != cookie_txt:
         set_hint_info('验证码错误！')
         redirect('/login')
