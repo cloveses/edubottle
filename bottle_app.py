@@ -17,7 +17,7 @@ def gen_verify_text():
     return verifytext
 
 def set_hint_info(info):
-    response.set_cookie('uname',
+    response.set_cookie('hint_info',
                 info.encode().decode('ISO-8859-1'),httponly='on')
 
 def get_hint_info():
