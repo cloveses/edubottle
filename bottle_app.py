@@ -97,6 +97,7 @@ def login_pst():
     action = request.forms.action
     vf_txt = request.forms.vf_txt
     cookie_txt = request.cookies.captchakey
+    response.set_cookie('captchakey','')
     if controls.make_passwd(vf_txt) != cookie_txt:
         set_hint_info('验证码错误！')
         redirect('/login')
