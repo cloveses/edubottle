@@ -7,14 +7,14 @@
  %if not current_user:
     <div class="row" style="background-color:#666;">
         <div class="col-md-12 text-right">
-        <a href="/login" class="btn btn-primary">login or signup</a>
+        <a href="/login" class="btn btn-primary">登录或注册</a>
         </div>
     </div>
         %else:
     <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-10 text-right"  style="background-color:#CFC;">
-        welcome ${current_user}!
+        当前登录用户： ${current_user}
         %if current_user == 'spradmn':
             <a href="/admin"  class="btn btn-primary">admin manage</a>
         %endif
