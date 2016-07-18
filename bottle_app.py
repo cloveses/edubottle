@@ -42,6 +42,7 @@ def serv_static(filename):
 def gen_captcha():
     response.content_type = "image/jpeg"
     verifytext = gen_verify_text()
+    response.set_cookie('captchakey',controls.make_passwd(verifytext))
     print(verifytext)
     kwargs = {}
     kwargs.update(settings.CPTCH)
@@ -95,7 +96,8 @@ def login_pst():
     passwd =request.forms.passwd
     action = request.forms.action
     vf_txt = request.forms.vf_txt
-    if vf_txt:
+    cookie_txt = request.cookies.captchakey
+    if controls.make_passwd(vf_txt) != cookie_txt:
         set_hint_info('验证码错误！')
         redirect('/login')
     if name and passwd and action:
