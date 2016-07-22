@@ -22,7 +22,7 @@ def set_hint_info(info):
 
 def get_hint_info():
     info = request.cookies.hint_info
-    request.cookies.hint_info = ''
+    response.set_cookie('hint_info','',httponly='on')
     return info
 
 @error(404)
