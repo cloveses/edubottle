@@ -106,6 +106,7 @@ def login_pst():
             if adm_login(name,passwd):
                 redirect('/')
             else:
+                set_hint_info('用户名或密码错误！')
                 redirect('/login')
         else:
             u = None
