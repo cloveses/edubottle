@@ -105,6 +105,8 @@ def login_pst():
         if name == settings.mgrinfo['name']:
             if adm_login(name,passwd):
                 redirect('/')
+            else:
+                redirect('/login')
         else:
             u = None
             if action == 'login':
