@@ -43,7 +43,7 @@
             <table class="table table-striped">
             %for proj in all_proj:
             <tr>
-                <td>${proj.name}</td><td>${proj.url}</td><td><a href="/admin?panme= ${proj.name}"  class="btn btn-primary">${'turn off' if proj.status else 'Turn on' }</a></td>
+                <td>${proj.name}</td><td>${proj.url}</td><td><a href="/admin?pname=${proj.name}"  class="btn btn-primary">${'turn off' if proj.status else 'Turn on' }</a></td>
             </tr>
             %endfor
             </table>
