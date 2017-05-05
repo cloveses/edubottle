@@ -93,6 +93,10 @@ def get_all_proj():
     sess = get_session()
     return sess.query(ProjectName).all()
 
+def get_open_proj():
+    sess = get_session()
+    return sess.query(ProjectName).filter_by(status=True).all()
+
 def get_info_url(url):
     if url:
         sess = get_session()
