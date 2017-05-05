@@ -59,7 +59,7 @@ def index():
     current_user = ''
     if 'uname' in request.cookies:
         current_user = request.cookies.uname
-    urls = controls.get_all_proj()
+    urls = controls.get_open_proj()
     hint_info = get_hint_info()
     return template('index',current_user=current_user,urls=urls,hint_info=hint_info)
 
