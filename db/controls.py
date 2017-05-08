@@ -9,7 +9,7 @@ def make_passwd(passwd):
 def get_session():
     Session = sessionmaker(bind=engine)
     Session = scoped_session(Session)
-    return Session()
+    return Session
 
 def user_exist(name):
     sess = get_session()
