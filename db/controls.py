@@ -83,19 +83,27 @@ def del_pro(name):
 def get_pro(name):
     if name:
         sess = get_session()
-        return sess.query(ProjectName).filter_by(name=name).first()
+        res = sess.query(ProjectName).filter_by(name=name).first()
+        sess.close()
+        return res
 
 def get_all_user():
     sess = get_session()
-    return sess.query(User).all()
+    res = sess.query(User).all()
+    sess.close()
+    return res
 
 def get_all_proj():
     sess = get_session()
-    return sess.query(ProjectName).all()
+    res = sess.query(ProjectName).all()
+    sess.close()
+    return res
 
 def get_open_proj():
     sess = get_session()
-    return sess.query(ProjectName).filter_by(status=True).all()
+    res = sess.query(ProjectName).filter_by(status=True).all()
+    sess.close()
+    return res
 
 def get_info_url(url):
     if url:
