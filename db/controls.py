@@ -8,7 +8,8 @@ def make_passwd(passwd):
 
 def get_session():
     Session = sessionmaker(bind=engine)
-    return scoped_session(Session)
+    Session = scoped_session(Session)
+    return Session()
 
 def user_exist(name):
     sess = get_session()
